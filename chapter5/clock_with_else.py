@@ -1,5 +1,3 @@
-# EG5-05 Simple Alarm Clock with else
-
 import time 
 
 current_time = time.localtime() 

@@ -1,5 +1,3 @@
-# EG5-01 One handed clock Version 1.0
-
 import time
 
 current_time = time.localtime()

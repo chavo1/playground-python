@@ -1,8 +1,3 @@
-# Some pygame helper functions for simple image display
-# and sound effect playback
-# Rob Miles July 2017
-# Version 1.0
-
 import time
 import pygame
 
@@ -19,8 +14,6 @@ def setup(width=800, height=600, title=''):
     global image
     global surface
 
-    # Don't initialise if we already have
-
     if surface is not None:
         return
 
@@ -29,14 +22,11 @@ def setup(width=800, height=600, title=''):
     text_color = (255, 0, 0)
     image = None
 
-    # pre initialise pyGame's audio engine to avoid sound latency issues
     pygame.mixer.pre_init(frequency=44100)
     pygame.init()
 
-    # initialise pyGame's audio engine
     pygame.mixer.init()
 
-    # Create the game surface
     surface = pygame.display.set_mode(window_size)
 
     clear_display()
@@ -112,7 +102,6 @@ def split_lines_on_spaces(text):
             word = word + ch
         else:
             if got_space:
-                # first character of next word
                 result.append(word)
                 word=ch
                 got_space=False
@@ -138,8 +127,6 @@ def get_display_lines(text, font, width):
         for word in words:
             word_width = font.size(word)[0]
             if x + word_width > width:
-                # Remove the trailing space from the line
-                # before adding to the list of lines to return
                 result.append(line)
                 line = word
                 x = word_width
@@ -154,7 +141,6 @@ def get_display_lines(text, font, width):
 def render_message(text, size=200, margin=20, horiz='center', vert='center',
                     color=(255, 0, 0), cursor=''):
 
-    # Get the text version of the input
     text = str(text)
 
     font = pygame.font.Font(None, size)
@@ -180,7 +166,6 @@ def render_message(text, size=200, margin=20, horiz='center', vert='center',
     elif vert == 'bottom':
         y=(window_size[1]-margin) - height
     else:
-        # default vertical cursor position is top
         y = margin
 
 
@@ -192,7 +177,6 @@ def render_message(text, size=200, margin=20, horiz='center', vert='center',
         elif horiz == 'right':
             x = window_size[0] - width - margin
         else:
-            # default position is left margin
             x = margin
         surface.blit(rendered_line, (x, y))
         y += height
@@ -202,13 +186,10 @@ def render_message(text, size=200, margin=20, horiz='center', vert='center',
         cursor_width = cursor_size[0]
         cursor_height = cursor_size[1]
         if len(rendered_lines):
-            # put the cursor on the end of an existing line
+
             y -= height
             x += width
         else:
-            # put the cursor in the start position for this
-            # orientation
-            # default x position is the margin
             x = margin
             
             if horiz == 'center':
@@ -216,7 +197,6 @@ def render_message(text, size=200, margin=20, horiz='center', vert='center',
             elif horiz == 'right':
                 x = window_size[0] - cursor_width - margin
             else:
-                # default position is left margin
                 x = margin
 
             if vert == 'center':
@@ -224,7 +204,6 @@ def render_message(text, size=200, margin=20, horiz='center', vert='center',
             elif vert == 'bottom':
                 y=(window_size[1]-margin) - cursor_height
             else:
-                # default vertical cursor position is top
                 y = margin
             
         cursor_image = font.render(cursor, 1, color)
@@ -259,7 +238,6 @@ def get_key():
     while True:
         event = pygame.event.wait()
         if event.type == 2:
-            # Event 2 is keydown
             key_code = event.dict['unicode']
             if key_code:
                 return key_code
@@ -287,7 +265,6 @@ def get_string(prompt, size=50, margin=20,
     def cursor_flip():
         nonlocal cursor
 
-    # create a timer for the cursor
 
     cursor_event = pygame.USEREVENT+1
     
@@ -303,7 +280,6 @@ def get_string(prompt, size=50, margin=20,
                 cursor = cursor_char
             redraw()
         elif event.type == 2:
-            # Event 2 is keydown
             key_code = event.dict['unicode']
             if key_code is None:
                 continue
@@ -318,7 +294,6 @@ def get_string(prompt, size=50, margin=20,
                     result += key_code
                     redraw()
 
-    # disable the timer for the cursor
     pygame.time.set_timer(cursor_event,0)
     return result
 
@@ -334,7 +309,6 @@ def get_weather_temp(latitude,longitude):
     req=urllib.request.urlopen(url)
     page=req.read()
     doc=xml.etree.ElementTree.fromstring(page)
-    # I'm not proud of this, but by gum it works...
     for child in doc:
         if child.tag == 'data':
             if child.attrib['type'] == 'current observations':
@@ -357,7 +331,6 @@ def get_weather_desciption(latitude,longitude):
     req=urllib.request.urlopen(url)
     page=req.read()
     doc=xml.etree.ElementTree.fromstring(page)
-    # I'm not proud of this, but by gum it works...
     for child in doc:
         if child.tag == 'data':
             if child.attrib['type'] == 'current observations':

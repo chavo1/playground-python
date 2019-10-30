@@ -1,5 +1,3 @@
-# EG5-04 Alarm clock with time display
-
 import time 
 
 current_time = time.localtime() 

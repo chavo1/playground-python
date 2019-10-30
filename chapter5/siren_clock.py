@@ -1,5 +1,3 @@
-# EG5-03 Siren Alarm Clock
-
 import time
 import snaps
 
