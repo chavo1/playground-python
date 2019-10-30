@@ -1,12 +1,12 @@
 # Playground - Begin to code with Python - exercises
 
-Chapter 1
+#### Chapter 1
 - Starting with Python
-Chapter 2
+#### Chapter 2
 - Python and Programming
-Chapter 3
+#### Chapter 3
 - Python program structure
-Chapter 4
+#### Chapter 4
 - Working with variables
-Chapter 5
+#### Chapter 5
 - Making decisions in programs
